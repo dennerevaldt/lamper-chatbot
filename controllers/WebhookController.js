@@ -14,8 +14,8 @@ function WebhookController(WebhookModel) {
 }
 
 WebhookController.prototype.getWebhook = function(request, response, next) {
-  if (request.query['hub.mode'] === 'subscribe' && request.query['hub.verify_token'] === process.env.PWD_FB) {
-    response.status(200).send(req.query['hub.challenge']);
+  if (request.query['hub.mode'] === 'subscribe' && request.query['hub.verify_token'] === process.env.PASS_FB) {
+    response.status(200).send(request.query['hub.challenge']);
   } else {
     response.sendStatus(403);
   }
