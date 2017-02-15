@@ -1,0 +1,27 @@
+{
+  "name": "@denner/lamp-chatbot",
+  "version": "1.0.0",
+  "description": "Chatbot lamp",
+  "main": "./bin/www",
+  "scripts": {
+    "start": "node ./bin/www",
+    "nodemon": "nodemon ./bin/www",
+    "test": ""
+  },
+  "keywords": [
+    "chatbot"
+  ],
+  "author": "Denner Evaldt <dnrevaldt@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "debug": "^2.6.1",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "cors": "^2.8.1",
+    "express": "^4.14.1",
+    "method-override": "^2.3.7",
+    "request": "^2.79.0"
+  }
+}
