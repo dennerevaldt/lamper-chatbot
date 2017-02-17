@@ -15,6 +15,31 @@ var sendTextMessage = function(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
+var sendFirstMenu = function(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'button',
+          text: 'Você já conhece nossos serviços, equipe, clientes?',
+          buttons: [
+            {
+              type: 'web_url',
+              url: 'https://www.lampti.com.br',
+              title: 'Acesse nosso site'
+            }
+          ]
+        }
+      }
+    }
+  };
+  callSendAPI(messageData);
+}
+
 var callSendAPI = function(messageData) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
@@ -89,9 +114,7 @@ WebhookController.prototype.getWebhook = function(request, response, next) {
 
 WebhookController.prototype.postWebhook = function(request, response, next) {
   var data = request.body;
-
   if (data && data.object === 'page') {
-
     // Percorrer todas as entradas entry
     data.entry.forEach(function(entry){
       // Percorrer todas as mensagens
@@ -103,18 +126,15 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
           switch (event.postback.payload) {
             case 'click_start':
               sendTextMessage(event.sender.id, 'Bora láa então! :D');
+              sendFirstMenu(event.sender.id);
               break;
-            default:
-
           }
         }
       });
 
     });
-
     response.sendStatus(200);
   }
-
 }
 
 module.exports = function(WebhookModel) {
