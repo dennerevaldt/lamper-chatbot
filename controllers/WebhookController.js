@@ -229,7 +229,7 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
               break;
             case 'click_video':
               sendAttachmentVideo(event.sender.id);
-              showOptionsMenu(event.sender.id);
+              // showOptionsMenu(event.sender.id);
               break;
           }
         }
