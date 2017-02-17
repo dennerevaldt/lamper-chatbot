@@ -120,7 +120,7 @@ var showOptionsMenu = function(recipientId) {
   setTimeout(function(){
     sendTextMessage(recipientId, 'Posso te ajudar com mais alguma coisa? :)');
     _state[recipientId] = 'options_menu';
-  }, 2000);
+  }, 1500);
 }
 
 // PRIVATE FN
