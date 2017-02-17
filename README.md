@@ -10,6 +10,6 @@ Para que a experiência de uso do Lamp Chatbot seja personalizada de acordo com 
 
 Para cancelar seu registro em nosso aplicativo, você deverá ir até o topo da página do artigo e selecionar “Remover este aplicativo”. Ou você pode cancelar o aplicativo acessando-o diretamente na sua página do Facebook em “configurações de conta”.
 
-Uma vez que você tenha removido o aplicativo, nós não mais teremos permissão para acessar suas informações do Facebook e as suas informações serão removidas de nosso aplicativo. Se você selecionar um artigo nosso no Facebook depois do seu cancelamento você será direcionado.
+Uma vez que você tenha removido o aplicativo, nós não mais teremos permissão para acessar suas informações do Facebook e as suas informações serão removidas de nosso aplicativo.
 
 Créditos: http://www.melhoresdestinos.com.br/politica-de-privacidade-do-melhores-destinos-para-aplicativo-facebook
