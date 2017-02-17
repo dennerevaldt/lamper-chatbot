@@ -219,8 +219,6 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
     data.entry.forEach(function(entry){
       // Percorrer todas as mensagens
       entry.messaging.forEach(function(event){
-        // mark seen last message
-        sendMarkSeenRequest(event.sender.id);
         if (event.message) {
           checkMessage(event);
         } else if(event.postback && event.postback.payload) {
