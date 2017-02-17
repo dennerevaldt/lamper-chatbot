@@ -59,7 +59,7 @@ var checkMessage = function(event) {
       case 'oi':
         sendTextMessage(senderID, 'E aai! Tudo certo? Meu nome é LAMPER e eu sou o robô da LAMP :)');
         break;
-      case: 'time':
+      case 'time':
         sendTextMessage(senderID, 'Me desculpe meu querido amigo, mas eu LAMPER sou #INTER :D');
         break;
       case 'tchau':
