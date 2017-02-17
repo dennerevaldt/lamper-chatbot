@@ -165,6 +165,16 @@ var sendOffViewRequest = function(recipientId) {
   callSendAPI(messageData);
 }
 
+var sendMarkSeenRequest = function(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    sender_action: 'mark_seen'
+  };
+  callSendAPI(messageData);
+}
+
 // PRIVATE FN
 
 function WebhookController(WebhookModel) {
@@ -187,8 +197,8 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
     data.entry.forEach(function(entry){
       // Percorrer todas as mensagens
       entry.messaging.forEach(function(event){
-        // send on typing chat
-        sendOnViewRequest(event.sender.id);
+        // mark seen last message
+        sendMarkSeenRequest(event.sender.id);
         if (event.message) {
           checkMessage(event);
         } else if(event.postback && event.postback.payload) {
@@ -207,8 +217,6 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
               break;
           }
         }
-        // send off typing chat
-        sendOffViewRequest(event.sender.id);
       });
 
     });
