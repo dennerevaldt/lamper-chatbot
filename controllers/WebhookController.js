@@ -145,6 +145,16 @@ var showOptionsMenu = function(recipientId) {
   }, 1500);
 }
 
+var sendViewRequest = function(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    sender_action: 'typing_on'
+  };
+  callSendAPI(messageData);
+}
+
 // PRIVATE FN
 
 function WebhookController(WebhookModel) {
@@ -161,6 +171,8 @@ WebhookController.prototype.getWebhook = function(request, response, next) {
 
 WebhookController.prototype.postWebhook = function(request, response, next) {
   var data = request.body;
+  sendViewRequest(event.sender.id);
+  
   if (data && data.object === 'page') {
     // Percorrer todas as entradas entry
     data.entry.forEach(function(entry){
@@ -181,7 +193,6 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
               break;
             case 'click_location':
               sendRequestLocation(event.sender.id);
-              // showOptionsMenu(event.sender.id);
               break;
           }
         }
