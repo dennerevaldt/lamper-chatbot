@@ -41,7 +41,7 @@ var sendFirstMenu = function(recipientId) {
             // },
             {
               type: 'postback',
-              title: 'Ver vídeo institucional',
+              title: 'Vídeo institucional',
               payload: 'click_video'
             }
           ]
