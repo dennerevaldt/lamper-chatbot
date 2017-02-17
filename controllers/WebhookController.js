@@ -184,7 +184,7 @@ var sendAttachmentVideo = function(recipientId) {
       attachment: {
         type: 'video',
         payload: {
-          url: 'https://www.youtube.com/watch?v=PGnSa5GZDjw'
+          url: 'https://www.lampti.com.br/video/lamp.mp4'
         }
       }
     }
