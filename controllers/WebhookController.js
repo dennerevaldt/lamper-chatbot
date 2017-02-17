@@ -31,8 +31,7 @@ var callSendAPI = function(messageData) {
       console.log(body.recipient_id);
     } else {
       console.log('Não foi possível enviar a mensagem');
-      console.log(error);
-      console.log(response);
+      console.log(response.body.error.message);
     }
   });
 }
@@ -49,10 +48,17 @@ var checkMessage = function(event) {
   var messageText = message.text;
   var attachments = message.attachments;
 
+  if (messageText.indexOf('grêmio') || messageText.indexOf('gremio') || messageText.indexOf('tricolor') || messageText.indexOf('gremista')) {
+    messageText = 'time';
+  }
+
   if (messageText) {
     switch (messageText) {
       case 'oi':
         sendTextMessage(senderID, 'E aai! Tudo certo? Meu nome é LAMPER e eu sou o robô da LAMP :)');
+        break;
+      case: 'time':
+        sendTextMessage(senderID, 'Me desculpe meu querido amigo, mas eu LAMPER sou #INTER :D');
         break;
       case 'tchau':
 
