@@ -17,6 +17,7 @@ var sendTextMessage = function(recipientId, messageText) {
 }
 
 var callSendAPI = function(messageData) {
+  console.log('TOKEN', process.env.TKN_MSG_FB);
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {
