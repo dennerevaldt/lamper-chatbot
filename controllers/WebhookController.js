@@ -149,6 +149,7 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
             case 'click_start':
               sendTextMessage(event.sender.id, 'Bora láa então! :D');
               sendFirstMenu(event.sender.id);
+              showOptionsMenu(event.sender.id);
               break;
           }
         }
