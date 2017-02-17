@@ -21,6 +21,30 @@ WebhookController.prototype.getWebhook = function(request, response, next) {
   }
 };
 
+WebhookController.prototype.postWebhook = function(request, response, next) {
+  var data = request.body;
+
+  if (data && data.object === 'page') {
+
+    // Percorrer todas as entradas entry
+    data.entry.forEach(function(entry){
+      var pageId = entry.id;
+      var timeOfEvent = entry.time;
+
+      // Percorrer todas as mensagens
+      entry.messaging.forEach(function(event){
+        if (event.message) {
+          console.log(event.message);
+        }
+      });
+
+    });
+
+    response.sendStatus(200);
+  }
+
+}
+
 module.exports = function(WebhookModel) {
   return new WebhookController(WebhookModel);
 };
