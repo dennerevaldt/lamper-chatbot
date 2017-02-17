@@ -36,11 +36,6 @@ var sendFirstMenu = function(recipientId) {
             },
             {
               type: 'postback',
-              title: 'Outra opção',
-              payload: 'click_other'
-            },
-            {
-              type: 'postback',
               title: 'Localização',
               payload: 'click_location'
             },
@@ -219,6 +214,7 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
     data.entry.forEach(function(entry){
       // Percorrer todas as mensagens
       entry.messaging.forEach(function(event){
+        sendMarkSeenRequest(event.sender.id);
         if (event.message) {
           checkMessage(event);
         } else if(event.postback && event.postback.payload) {
@@ -227,10 +223,6 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
             case 'click_start':
               sendTextMessage(event.sender.id, 'Bora láa então! :D');
               sendFirstMenu(event.sender.id);
-              break;
-            case 'click_other':
-              sendTextMessage(event.sender.id, 'Você clicou na segunda opção');
-              showOptionsMenu(event.sender.id);
               break;
             case 'click_location':
               sendRequestLocation(event.sender.id);
