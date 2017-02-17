@@ -55,15 +55,15 @@ var checkMessage = function(event) {
   }
 
   if (messageText) {
-    switch (messageText) {
+    switch (messageText.toLowerCase()) {
       case 'oi':
-        sendTextMessage(senderID, 'E aai! Tudo certo? Meu nome é LAMPER e eu sou o robô da LAMP :)');
+        sendTextMessage(senderID, 'Olá! Meu nome é LAMPER e eu sou o robô da LAMP :)');
         break;
       case 'time':
-        sendTextMessage(senderID, 'Me desculpe meu querido amigo, mas eu LAMPER sou #INTER :D');
+        sendTextMessage(senderID, 'Me desculpe meu querido amigo, mas o LAMPER aqui é #INTER :D');
         break;
       case 'tchau':
-
+        sendTextMessage(senderID, 'Até logo! Volte sempre.');
         break;
       default:
 
