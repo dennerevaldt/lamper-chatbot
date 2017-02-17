@@ -121,10 +121,17 @@ var checkMessage = function(event) {
           // default
       }
     } else {
+      // Zuera never ends
+      if (msg.indexOf('grêmio') >= 0 || msg.indexOf('gremio') >= 0 || msg.indexOf('tricolor') >= 0 || msg.indexOf('gremista') >= 0) {
+        msg = 'time';
+      }
       // Não é mais primeiro momento, estado inicial
       switch (msg) {
         case 'oi':
           sendTextMessage(senderID, 'Olá! Meu nome é LAMPER e eu sou o robô da LAMP :)');
+          break;
+        case: 'time':
+          sendTextMessage(senderID, 'Desculpe meu amigo querido, mas o LAMPER é #INTER! https://www.facebook.com/images/emoji.php/v7/z84/1/32/1f1e6_1f1f9.png');
           break;
         case 'tchau':
           sendTextMessage(senderID, 'Até logo! Volte sempre.');
