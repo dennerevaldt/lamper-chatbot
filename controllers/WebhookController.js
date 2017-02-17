@@ -38,10 +38,32 @@ var sendFirstMenu = function(recipientId) {
               type: 'postback',
               title: 'Outra opção',
               payload: 'click_other'
+            },
+            {
+              type: 'postback',
+              title: 'Localização',
+              payload: 'click_location'
             }
           ]
         }
       }
+    }
+  };
+  callSendAPI(messageData);
+}
+
+var sendRequestLocation = function(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: 'Por favor, compartilhe sua localização',
+      quick_replies:[
+        {
+          "content_type":"location",
+        }
+      ]
     }
   };
   callSendAPI(messageData);
@@ -155,6 +177,10 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
               break;
             case 'click_other':
               sendTextMessage(event.sender.id, 'Você clicou na segunda opção');
+              showOptionsMenu(event.sender.id);
+              break;
+            case 'click_location':
+              sendRequestLocation(event.sender.id);
               showOptionsMenu(event.sender.id);
               break;
           }
