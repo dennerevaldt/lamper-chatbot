@@ -33,6 +33,11 @@ var sendFirstMenu = function(recipientId) {
               type: 'web_url',
               url: 'https://www.lampti.com.br',
               title: 'Acesse nosso site'
+            },
+            {
+              type: 'postback',
+              title: 'Outra opção',
+              payload: 'click_other'
             }
           ]
         }
@@ -149,6 +154,9 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
             case 'click_start':
               sendTextMessage(event.sender.id, 'Bora láa então! :D');
               sendFirstMenu(event.sender.id);
+              break;
+            case 'click_other':
+              sendTextMessage(event.sender.id, 'Você clicou na segunda opção');
               showOptionsMenu(event.sender.id);
               break;
           }
