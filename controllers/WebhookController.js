@@ -21,7 +21,7 @@ var callSendAPI = function(messageData) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {
-      accessToken: process.env.TKN_MSG_FB,
+      access_token: process.env.TKN_MSG_FB,
       method: 'POST',
       json: messageData
     }
