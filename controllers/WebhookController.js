@@ -48,7 +48,9 @@ var checkMessage = function(event) {
   var messageText = message.text;
   var attachments = message.attachments;
 
-  if (messageText.indexOf('grêmio') || messageText.indexOf('gremio') || messageText.indexOf('tricolor') || messageText.indexOf('gremista')) {
+  var msg = messageText.toLowerCase();
+
+  if (msg.indexOf('grêmio') >= 0 || msg.indexOf('gremio') >= 0 || msg.indexOf('tricolor') >= 0 || msg.indexOf('gremista') >= 0) {
     messageText = 'time';
   }
 
