@@ -12,12 +12,10 @@ var sendTextMessage = function(recipientId, messageText) {
       text: messageText
     }
   };
-
   callSendAPI(messageData);
 }
 
 var callSendAPI = function(messageData) {
-  console.log('MSG DATA', messageData);
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {
@@ -101,7 +99,14 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
         if (event.message) {
           checkMessage(event);
         } else if(event.postback && event.postback.payload) {
-          console.log("Payload clicado, ele é o ", event.postback.payload);
+          // switch payload
+          switch (event.postback.payload) {
+            case 'click_start':
+              sendTextMessage(event.sender.id, 'Bora láa então! :D');
+              break;
+            default:
+
+          }
         }
       });
 
