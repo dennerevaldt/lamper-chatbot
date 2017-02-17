@@ -145,12 +145,22 @@ var showOptionsMenu = function(recipientId) {
   }, 1500);
 }
 
-var sendViewRequest = function(recipientId) {
+var sendOnViewRequest = function(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
     },
     sender_action: 'typing_on'
+  };
+  callSendAPI(messageData);
+}
+
+var sendOffViewRequest = function(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    sender_action: 'typing_off'
   };
   callSendAPI(messageData);
 }
@@ -177,8 +187,8 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
     data.entry.forEach(function(entry){
       // Percorrer todas as mensagens
       entry.messaging.forEach(function(event){
-        sendViewRequest(event.sender.id);
-        
+        // send on typing chat
+        sendOnViewRequest(event.sender.id);
         if (event.message) {
           checkMessage(event);
         } else if(event.postback && event.postback.payload) {
@@ -197,6 +207,8 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
               break;
           }
         }
+        // send off typing chat
+        sendOffViewRequest(event.sender.id);
       });
 
     });
