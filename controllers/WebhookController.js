@@ -117,7 +117,7 @@ var checkMessage = function(event) {
 }
 
 var showOptionsMenu = function(recipientId) {
-  setTimeOut(function(){
+  setTimeout(function(){
     sendTextMessage(recipientId, 'Posso te ajudar com mais alguma coisa? :)');
     _state[recipientId] = 'options_menu';
   }, 2000);
@@ -155,7 +155,7 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
               break;
             case 'click_other':
               sendTextMessage(event.sender.id, 'Você clicou na segunda opção');
-              // showOptionsMenu(event.sender.id);
+              showOptionsMenu(event.sender.id);
               break;
           }
         }
