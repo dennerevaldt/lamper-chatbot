@@ -48,7 +48,7 @@ var checkMessage = function(event) {
   var messageText = message.text;
   var attachments = message.attachments;
 
-  var msg = if(messageText) messageText.toLowerCase();
+  var msg = messageText ? messageText.toLowerCase() : undefined;
 
   if (msg) {
 
