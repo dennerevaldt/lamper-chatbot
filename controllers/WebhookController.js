@@ -43,6 +43,11 @@ var sendFirstMenu = function(recipientId) {
               type: 'postback',
               title: 'Localização',
               payload: 'click_location'
+            },
+            {
+              type: 'postback',
+              title: 'Ver vídeo institucional',
+              payload: 'click_video'
             }
           ]
         }
@@ -175,6 +180,23 @@ var sendMarkSeenRequest = function(recipientId) {
   callSendAPI(messageData);
 }
 
+var sendAttachmentVideo = function(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: 'video',
+        payload: {
+          url: 'https://www.youtube.com/watch?v=PGnSa5GZDjw'
+        }
+      }
+    }
+  };
+  callSendAPI(messageData);
+}
+
 // PRIVATE FN
 
 function WebhookController(WebhookModel) {
@@ -214,6 +236,10 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
               break;
             case 'click_location':
               sendRequestLocation(event.sender.id);
+              break;
+            case 'click_video':
+              sendAttachmentVideo(event.sender.id);
+              showOptionsMenu(event.sender.id);
               break;
           }
         }
