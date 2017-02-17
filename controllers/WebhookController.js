@@ -48,14 +48,16 @@ var checkMessage = function(event) {
   var messageText = message.text;
   var attachments = message.attachments;
 
-  var msg = messageText.toLowerCase();
+  var msg = if(messageText) messageText.toLowerCase();
 
-  if (msg.indexOf('grêmio') >= 0 || msg.indexOf('gremio') >= 0 || msg.indexOf('tricolor') >= 0 || msg.indexOf('gremista') >= 0) {
-    messageText = 'time';
-  }
+  if (msg) {
 
-  if (messageText) {
-    switch (messageText.toLowerCase()) {
+    // the zuera never ends
+    if (msg.indexOf('grêmio') >= 0 || msg.indexOf('gremio') >= 0 || msg.indexOf('tricolor') >= 0 || msg.indexOf('gremista') >= 0) {
+      messageText = 'time';
+    }
+
+    switch (msg) {
       case 'oi':
         sendTextMessage(senderID, 'Olá! Meu nome é LAMPER e eu sou o robô da LAMP :)');
         break;
@@ -66,7 +68,7 @@ var checkMessage = function(event) {
         sendTextMessage(senderID, 'Até logo! Volte sempre.');
         break;
       default:
-
+        sendTextMessage(senderID, 'Não entendi sua necessidade/comando. :(');
     }
   } else if(attachments) {
     // anexos
@@ -94,13 +96,12 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
 
     // Percorrer todas as entradas entry
     data.entry.forEach(function(entry){
-      var pageId = entry.id;
-      var timeOfEvent = entry.time;
-
       // Percorrer todas as mensagens
       entry.messaging.forEach(function(event){
         if (event.message) {
           checkMessage(event);
+        } else if(event.postback && event.postback.payload) {
+          console.log("Payload clicado, ele é o ", event.postback.payload);
         }
       });
 
