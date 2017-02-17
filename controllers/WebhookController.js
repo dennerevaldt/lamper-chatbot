@@ -130,7 +130,7 @@ var checkMessage = function(event) {
         case 'oi':
           sendTextMessage(senderID, 'Olá! Meu nome é LAMPER e eu sou o robô da LAMP :)');
           break;
-        case: 'time':
+        case 'time':
           sendTextMessage(senderID, 'Desculpe meu amigo querido, mas o LAMPER é #INTER! https://www.facebook.com/images/emoji.php/v7/z84/1/32/1f1e6_1f1f9.png');
           break;
         case 'tchau':
