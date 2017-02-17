@@ -32,6 +32,7 @@ var callSendAPI = function(messageData) {
     } else {
       console.log('Não foi possível enviar a mensagem');
       console.log(error);
+      console.log(response);
     }
   });
 }
