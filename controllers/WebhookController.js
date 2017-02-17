@@ -84,7 +84,6 @@ var checkMessage = function(event) {
     if (_state[senderID]) {
       switch (_state[senderID]) {
         case 'options_menu':
-
           switch (msg) {
             case 'sim':
               sendFirstMenu(senderID);
@@ -95,7 +94,6 @@ var checkMessage = function(event) {
             default:
             // default
           }
-
           break;
         default:
           // default
@@ -157,7 +155,7 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
               break;
             case 'click_other':
               sendTextMessage(event.sender.id, 'Você clicou na segunda opção');
-              showOptionsMenu(event.sender.id);
+              // showOptionsMenu(event.sender.id);
               break;
           }
         }
