@@ -34,11 +34,11 @@ var sendFirstMenu = function(recipientId) {
               url: 'https://www.lampti.com.br',
               title: 'Acesse nosso site'
             },
-            {
-              type: 'postback',
-              title: 'Localização',
-              payload: 'click_location'
-            },
+            // {
+            //   type: 'postback',
+            //   title: 'Localização',
+            //   payload: 'click_location'
+            // },
             {
               type: 'postback',
               title: 'Ver vídeo institucional',
