@@ -1,13 +1,69 @@
-var debug  = require('debug')('api:ctrlWebhook');
+var debug   = require('debug')('api:ctrlWebhook'),
+    request = require('request');
 
-var handleNotFound = function(data) {
-  if(!data) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    throw err;
+// PRIVATE FN
+
+var sendTextMessage = function(recipientId, messageText) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: messageText
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
+var callSendAPI = function(messageData) {
+  request({
+    uri: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {
+      accessToken: process.env.TKN_MSG_FB,
+      method: 'POST',
+      json: messageData
+    }
+  }, function(error, response, body){
+    if (!error && response.statusCode == 200) {
+      console.log('Mensagem enviada com sucesso');
+      console.log(body.recipient_id);
+    } else {
+      console.log('Não foi possível enviar a mensagem');
+      console.log(error);
+    }
+  });
+}
+
+var checkMessage = function(event) {
+  var senderID = event.sender.id;
+  var recipientID = event.recipient.id;
+  var timeOfMessage = event.timestamp;
+  var message = event.message;
+
+  //////
+
+  var messageID = message.mid;
+  var messageText = message.text;
+  var attachments = message.attachments;
+
+  if (messageText) {
+    switch (messageText) {
+      case 'oi':
+        sendTextMessage(senderID, 'E aai! Tudo certo? Meu nome é LAMPER e eu sou o robô da LAMP :)');
+        break;
+      case 'tchau':
+
+        break;
+      default:
+
+    }
+  } else if(attachments) {
+    // anexos
   }
-  return data;
-};
+}
+
+// PRIVATE FN
 
 function WebhookController(WebhookModel) {
   this.model = WebhookModel;
@@ -34,7 +90,7 @@ WebhookController.prototype.postWebhook = function(request, response, next) {
       // Percorrer todas as mensagens
       entry.messaging.forEach(function(event){
         if (event.message) {
-          console.log(event.message);
+          checkMessage(event);
         }
       });
 
