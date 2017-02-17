@@ -3,6 +3,8 @@ var debug   = require('debug')('api:ctrlWebhook'),
 
 // PRIVATE FN
 
+var _state = [];
+
 var sendTextMessage = function(recipientId, messageText) {
   var messageData = {
     recipient: {
@@ -65,7 +67,7 @@ var checkMessage = function(event) {
   var timeOfMessage = event.timestamp;
   var message = event.message;
 
-  //////
+  /////////////////
 
   var messageID = message.mid;
   var messageText = message.text;
@@ -74,28 +76,48 @@ var checkMessage = function(event) {
   var msg = messageText ? messageText.toLowerCase() : undefined;
 
   if (msg) {
+    if (_state[senderID]) {
+      switch (_state[senderID]) {
+        case 'options_menu':
 
-    // the zuera never ends
-    if (msg.indexOf('grêmio') >= 0 || msg.indexOf('gremio') >= 0 || msg.indexOf('tricolor') >= 0 || msg.indexOf('gremista') >= 0) {
-      messageText = 'time';
-    }
+          switch (msg) {
+            case 'sim':
+              sendFirstMenu(senderID);
+              break;
+            case 'não':
+              sendTextMessage(senderID, 'Obrigado por nos procurar, curta nossa página!');
+              break;
+            default:
+            // default
+          }
 
-    switch (msg) {
-      case 'oi':
-        sendTextMessage(senderID, 'Olá! Meu nome é LAMPER e eu sou o robô da LAMP :)');
-        break;
-      case 'time':
-        sendTextMessage(senderID, 'Me desculpe meu querido amigo, mas o LAMPER aqui é #INTER :D');
-        break;
-      case 'tchau':
-        sendTextMessage(senderID, 'Até logo! Volte sempre.');
-        break;
-      default:
-        sendTextMessage(senderID, 'Não entendi sua necessidade/comando. :(');
+          break;
+        default:
+          // default
+      }
+    } else {
+      // Não é mais primeiro momento, estado inicial
+      switch (msg) {
+        case 'oi':
+          sendTextMessage(senderID, 'Olá! Meu nome é LAMPER e eu sou o robô da LAMP :)');
+          break;
+        case 'tchau':
+          sendTextMessage(senderID, 'Até logo! Volte sempre.');
+          break;
+        default:
+          sendTextMessage(senderID, 'Não entendi sua necessidade/comando. :(');
+      }
     }
   } else if(attachments) {
     // anexos
   }
+}
+
+var showOptionsMenu = function(recipientId) {
+  setTimeOut(function(){
+    sendTextMessage(recipientId, 'Posso te ajudar com mais alguma coisa? :)');
+    _state[recipientId] = 'options_menu';
+  }, 2000);
 }
 
 // PRIVATE FN
